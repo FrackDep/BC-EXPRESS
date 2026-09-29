@@ -1,10 +1,10 @@
 # Proyecto Semanal — API con Autenticación JWT Completa
 
-## 🎯 Objetivo
+##  Objetivo
 
 Integrar autenticación JWT completa con el CRUD del catálogo de espacios de Flanchito space. Todas las rutas del recurso requieren una sesión válida.
 
-## 📋 Dominio asignado
+##  Dominio asignado
 
 **Coworking Space — Flanchito space.** Espacio de trabajo compartido en Bogotá, con zonas de patio, biblioteca y terraza. Los miembros se registran para consultar espacios; los anfitriones gestionan el catálogo en la semana 08.
 
@@ -39,7 +39,7 @@ Ejemplo: **Cabina Arrayán**, espacio individual en la biblioteca:
 
 La creación valida los campos con Zod. `PATCH` acepta cambios parciales, rechaza objetos vacíos y comprueba la combinación resultante. Un código duplicado devuelve 409; un ID mal formado, 400; un espacio inexistente, 404.
 
-## 🗂️ Estructura del starter
+##  Estructura del starter
 
 ```text
 starter/
@@ -69,7 +69,7 @@ Las rutas delegan en controladores; los controladores validan entradas y llaman 
 
 El recurso del dominio se implementa en `space.model.ts`, `space.schema.ts`, `space.repository.ts`, `space.service.ts`, `space.controller.ts` y `space.routes.ts`.
 
-## ▶️ Cómo ejecutar
+##  Cómo ejecutar
 
 **Requisitos:** Node.js 22 o superior, pnpm 10.34.5 y MongoDB 8.
 
@@ -117,7 +117,7 @@ Si MongoDB ya está disponible, omitir Docker y ajustar `MONGODB_URI`. Ejecutar 
 
 **Base de la API:** `http://localhost:3000/api/v1`.
 
-## 👤 Usuarios de prueba
+##  Usuarios de prueba
 
 | Nombre | Email para login | Contraseña | Rol |
 |---|---|---|---|
@@ -135,7 +135,7 @@ Registro del miembro:
 }
 ```
 
-## 🔐 Sistema de autenticación
+## Sistema de autenticación
 
 - `User` contiene nombre, email único, contraseña y rol; la contraseña se excluye de las consultas normales con `select: false`.
 - Registro con `bcrypt.hash(password, 10)` asíncrono; login con `bcrypt.compare`.
@@ -150,7 +150,7 @@ Registro del miembro:
 - Logout invalida el refresh y elimina ambas cookies. Un access copiado antes del cierre conserva validez hasta expirar.
 - Un nuevo login reemplaza la sesión renovable anterior de la misma cuenta.
 
-## 📍 Endpoints
+##  Endpoints
 
 Todas las rutas usan el prefijo `/api/v1`.
 
@@ -168,7 +168,7 @@ Todas las rutas usan el prefijo `/api/v1`.
 | PATCH | `/spaces/:id` | Autenticado | 200, actualización parcial |
 | DELETE | `/spaces/:id` | Autenticado | 204, sin body |
 
-## 🧪 Probar con Thunder Client / Postman
+##  Probar con Thunder Client / Postman
 
 Importar [Flanchito-space.postman_collection.json](Flanchito-space.postman_collection.json). La variable `baseUrl` apunta a `http://localhost:3000/api/v1`.
 
@@ -193,7 +193,7 @@ La colección usa cookies explícitas guardadas durante el login y desactiva el 
 | Crear → listar → detalle → actualizar → eliminar | 201 → 200 → 200 → 200 → 204 |
 | Consultar un espacio eliminado | 404 |
 
-## 📸 Entregables y capturas
+##  Entregables y capturas
 
 - [x] Código fuente funcional con el dominio Flanchito space.
 - [x] README con instalación, autenticación y endpoints.
@@ -208,6 +208,6 @@ Capturar las solicitudes siguientes con su URL, estado y respuesta visibles:
 5. Refresh exitoso con nuevas cookies.
 6. Logout y refresh posterior → 401.
 
-## 📊 Evaluación
+##  Evaluación
 
 Consultar la [rúbrica de la semana 07](../rubrica-evaluacion.md).
