@@ -1,0 +1,12 @@
+import { Router } from 'express';
+import * as spaces from '../controllers/space.controller';
+import { authMiddleware } from '../middlewares/auth.middleware';
+import { requireRole } from '../middlewares/requireRole';
+export const spaceRouter = Router();
+spaceRouter.use(authMiddleware);
+spaceRouter.get('/', spaces.listSpaces);
+spaceRouter.get('/:id', spaces.getSpace);
+spaceRouter.use(requireRole('admin'));
+spaceRouter.post('/', spaces.createSpace);
+spaceRouter.patch('/:id', spaces.updateSpace);
+spaceRouter.delete('/:id', spaces.deleteSpace);
