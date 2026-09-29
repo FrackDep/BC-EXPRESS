@@ -1,0 +1,10 @@
+import { User } from '../models/user.model';
+import type { RegisterDto } from '../schemas/auth.schema';
+export const create = (dto: RegisterDto) => User.create({ name: dto.name, email: dto.email, password: dto.password, role: 'user' });
+export const findByEmail = (email: string) => User.findOne({ email });
+export const findByEmailWithPassword = (email: string) => User.findOne({ email }).select('+password');
+export const findById = (id: string) => User.findById(id);
+export const findByIdWithTokens = (id: string) => User.findById(id).select('+refreshToken');
+export const updateRefreshToken = (id: string, hash: string) => User.updateOne({ _id: id }, { $set: { refreshToken: hash } });
+export const rotateRefreshToken = (id: string, previousHash: string, nextHash: string) => User.updateOne({ _id: id, refreshToken: previousHash }, { $set: { refreshToken: nextHash } });
+export const clearRefreshToken = (id: string) => User.updateOne({ _id: id }, { $set: { refreshToken: null } });

@@ -1,0 +1,15 @@
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import { authRouter } from './routes/auth.routes';
+import { errorHandler } from './middlewares/errorHandler';
+import { notFound } from './middlewares/notFound';
+import { spaceRouter } from './routes/space.routes';
+export const app = express();
+app.disable('x-powered-by');
+app.use(express.json({ limit: '16kb' }));
+app.use(cookieParser());
+app.get('/api/v1/health', (_req, res) => { res.json({ status: 'ok', coworking: 'Flanchito space' }); });
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/spaces', spaceRouter);
+app.use(notFound);
+app.use(errorHandler);
